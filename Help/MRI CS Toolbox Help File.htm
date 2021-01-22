@@ -1,0 +1,79 @@
+
+<!-- saved from url=(0036)http://web.mst.edu/~bahrkb/mri/Help/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>MRI CS Toolbox Help File</title></head><body>
+
+<h1>MRI CS Toolbox Overview</h1>
+
+The MRI CS Toolbox is a convenient program for experimenting with CS reconstruction by undersampling full sets of k-space data. It has support for many bases and many sampling methods, and is designed to run unattended with batch processing in order to analyze a large amount of data and sampling techniques at once. It can perform reconstructions in both 2D and 3D, and can also reconstruct images from true undersampled data.
+
+<h2>System Requirements</h2>
+
+The CS toolbox requires MATLAB R2011b or higher, as well as a computer with enough memory to hold all of the data required (at least 1 GB of RAM is recommended). A multi-core CPU can be used with the Parallel Processing Toolbox in order to greatly speed up batch processing operations. In general, the faster your CPU is, the faster the algorithms will run. No GPU acceleration is used in this program.
+
+<h2>Opening Data Files</h2>
+
+The "Add" and "Delete" buttons on the image list will allow you to import one or more k-space data files into the program. Any data imported into the program should be in the .MAT format, with the variable "d" containing a 2D or 3D complex double array that consists of full sets of k-space data. If a single image or video is imported (as opposed to multiple at once), the fully sampled reconstruction will be displayed in the output window. Alternatively, it is possible to import a pre-undersampled data set, with the variable "mask" in the same .MAT file specifying which points were sampled. In this case, no reconstruction can be displayed immediately; the CS algorithm must be performed first.
+
+<h2>Adding Reconstruction Bases</h2>
+
+The "Add" and "Delete" buttons on the 2D basis list will allow you to select which sparsifying transform bases to use in your experiment. The following bases are supported:<p>
+
+<table border="1"><tbody><tr><td>ZP</td><td>Zero-padding (all missing k-space points are filled with zeros, no CS is performed)</td></tr>
+<tr><td>Identity</td><td>Identity basis (the image domain itself)</td></tr>
+<tr><td>DFT</td><td>Fourier basis (the k-space domain itself)</td></tr>
+<tr><td>DCT</td><td>The block DCT bases (i.e. DCT-8 operates on 8x8 pixel blocks, DCT-Full treats the whole image as a block)</td></tr>
+<tr><td>Wavelet</td><td>Various wavelet transforms (see MATLAB "wfilters" documentation for more info)</td></tr>
+<tr><td>FD</td><td>Finite difference transforms in X or Y direction (number specifies order)</td></tr></tbody></table></p><p>
+
+Each wavelet decomposition is performed to the maximum level allowed by MATLAB. To add all of the bases at once, choose "Select All" at the bottom of the list. Note that the finite difference transforms are not optimized for performance and may require a long time to execute.
+
+</p><h2>Adjusting CS Parameters</h2>
+
+The CS parameters section allows you to adjust which undersampling percentages to try. For example, if the minimum value is 0.3, the step size is 0.05, and the maximum value is 0.5, the program will attempt sequential reconstructions using 30%, 35%, 40%, 45%, and 50% of the k-space coefficients. This is a good way to find the best trade-off between undersampling rate and image quality.<p>
+
+The L1 minimization program used by this toolbox is YALL1. There are four major minimization models that can be used in this toolbox; these models along with their relevant parameters are available for adjustment by clicking the "YALL1 Settings" button. See <a href="http://web.mst.edu/~bahrkb/mri/Help/YALL1.PDF">the YALL1 reference manual</a> for more details on what these settings mean. The sparsifying basis in the time dimension (only applicable to 3D reconstruction) can also be changed here. The default sparsifying basis in the time domain is the DFT, but the identity transform, the DCT, and the finite difference transform may be also selected.
+
+</p><h2>Program Output Settings</h2>
+
+By default, the program will send the fully sampled reconstructions as well as a .MAT file containing all of the final output values to the "Output" directory located in the main program folder. However, it is also possible to save each sampling mask, reconstructed image, and PSNR error graph using the checkboxes in the output section. Be careful when using these settings, as a massive number of images can be generated in some cases.<p>
+
+The Density Compensation option adjusts the reconstruction such that the less likely samples will carry more weight. For example, if a k-space line only has a 30% chance of being picked, and it gets picked, the pixel values will be divided by 0.3 before reconstruction. This can help reconstruction in some cases, but is not usually recommended.</p><p>
+
+The total trials box indicates the number of times to run the simulation on each image. This is important because of the random variance in the reconstruction patterns. If more than 1 trial is performed, the error metric will be calculated based on the average error over all the trials. Also, the total simulation time will depend on the product of all the test parameters. For example, if there are 3 videos, 4 bases, 5 sampling percentages, and 5 trials, the simulation will be performing 3*4*5*5=300 reconstructions.
+
+</p><h2>Choosing Sampling Patterns</h2>
+
+There are several different ways to construct a sampling pattern for the reconstruction. Which points are picked and which ones are not is dependent on the different sampling types. The examples below illustrate the different available choices of sampling pattern. Black pixels represent k-space points that are not used, and white pixels represent those that are. Each example below uses 30% undersampling.<p>
+
+<table border="1"><tbody><tr><td><img src="./MRI CS Toolbox Help File_files/example.png" width="320" height="240"><br><center>Nonuniform</center></td><td><img src="./MRI CS Toolbox Help File_files/uniform.png" width="320" height="240"><br><center>Uniform</center></td></tr><tr><td><img src="./MRI CS Toolbox Help File_files/uniform.png" width="320" height="240"><br><center>Incoherent</center></td><td><img src="./MRI CS Toolbox Help File_files/coherent.png" width="320" height="240"><br><center>Coherent</center></td></tr>
+<tr><td><img src="./MRI CS Toolbox Help File_files/example.png" width="320" height="240"><br><center>Line-based</center></td><td><img src="./MRI CS Toolbox Help File_files/point.png" width="320" height="240"><br><center>Point-based</center></td></tr>
+<tr><td><img src="./MRI CS Toolbox Help File_files/example.png" width="320" height="240"><br><center>Asymmetric</center></td><td><img src="./MRI CS Toolbox Help File_files/symmetric.png" width="320" height="240"><br><center>Symmetric</center></td></tr></tbody></table></p><p>
+
+For most cases, nonuniform, incoherent, asymmetric line-based sampling is recommended for MRI. The relative sampling density allows you to adjust how dense the random distribution is around the center of k-space in the case of nonuniform sampling. A value of 1 means that the edges of the image correspond to 4 standard deviations of the Gaussian distribution. If it is changed to 1.5, the edges become 6 standard deviations and the distribution gets narrow. Setting this value too low will just result in near-uniform sampling, while setting it too high will result in a non-random block of the center coefficients being selected.</p><p>
+
+The mask trials setting allows you to adjust how many different masks will be generated before the best one is picked. The "best sampling mask" is considered to be the one with the minimum peak interference in the point spread function. However, when dealing with pre-undersampled data (i.e. the mask is already known), all parameters related to mask generation are ignored.
+
+</p><h2>Running the Simulation</h2>
+
+When you hit "Start", the simulation commences and runs all the way through until it is finished. Hitting "Stop" will abort the simulation after it finishes the current reconstruction. Upon completion, the program will print the results for the best basis (based on the mean PSNR value) in the command window. It will also save the individual PSNR values as well as some sparsity measures in a .MAT file in the Output directory
+
+<h2>Converting Paravision FID files to MAT files</h2>
+
+This program is capable of converting raw FID data from Paravision into the standard MAT format it uses. To convert a fully-sampled k-space data set, simply click Convert -&gt; Paravision FID to MAT, select the directory containing the ACQP and FID files, select an output location, and let it run.<p>
+
+In order to convert an undersampled data set, the sampling mask must also be known. To do this successfully, a file called "mask.txt" must be placed in the FID directory. This file must contain, in order: the final dimensions of the file separated by a space, then 0's and 1's indicating sampled lines separated by newlines.</p><p>
+
+As an example, an 8x8 readout where only the 4th and 6th lines are sampled would have a mask.txt that looks like:</p><p>
+
+8 8<br>
+0<br>
+0<br>
+0<br>
+1<br>
+0<br>
+1<br>
+0<br>
+0<br>
+
+
+</p></body></html>
