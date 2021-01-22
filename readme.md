@@ -7,7 +7,7 @@ For more information, contact Dr. Rosa Zheng  (yrz218 at lehigh.edu) or Dr. Lixi
 To run this program, open the file "MRI_CS_Toolbox.m" in MATLAB and run it.
 The GUI should appear, which has a menu available with further help.
 
-**Reference paper: **
+**Reference paper:**
 
 B. Hirst, Y. R. Zheng, M. Yang, and L. Ma, “3D Spatio-Temporal Analysis for Compressive Sensing in Magnetic Resonance Imaging of the Murine Cardiac Cycle,” SPIE Medical Imaging, Orlando, FL, Feb. 9-14, 2013. pp. 1-10.
 
