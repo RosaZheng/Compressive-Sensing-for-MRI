@@ -1,11 +1,17 @@
-#MRI CS Toolbox for MATLAB - Copyright (c) Brice Hirst, 2013
+# MRI CS Toolbox for MATLAB - Copyright (c) Brice Hirst, 2013 
 
-The work was done at Missouri University of Science and Technology and the University of Missouri -Columbia
+The work was done at Missouri University of Science and Technology and the University of Missouri-Columbia
 
-For more information, contact Dr. Rosa Zheng at yrz218@lehigh.edu or Dr. Lixin Ma at mal@health.missouri.edu
+For more information, contact Dr. Rosa Zheng  (yrz218 at lehigh.edu) or Dr. Lixin Ma  (mal at health.missouri.edu)
 
 To run this program, open the file "MRI_CS_Toolbox.m" in MATLAB and run it.
 The GUI should appear, which has a menu available with further help.
+
+**Reference paper: **
+
+B. Hirst, Y. R. Zheng, M. Yang, and L. Ma, “3D Spatio-Temporal Analysis for Compressive Sensing in Magnetic Resonance Imaging of the Murine Cardiac Cycle,” SPIE Medical Imaging, Orlando, FL, Feb. 9-14, 2013. pp. 1-10.
+
+**Copyright**
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
