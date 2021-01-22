@@ -1,4 +1,4 @@
-# MRI CS Toolbox for MATLAB - Copyright (c) Brice Hirst, 2013 
+# MRI Compressive Sensing Toolbox for MATLAB  
 
 The work was done at Missouri University of Science and Technology, the University of Missouri-Columbia and and Harry S Truman Memorial Veterans’ Hospital.
 
@@ -12,6 +12,8 @@ The GUI should appear, which has a menu available with further help.
 B. Hirst, Y. R. Zheng, M. Yang, and L. Ma, “3D Spatio-Temporal Analysis for Compressive Sensing in Magnetic Resonance Imaging of the Murine Cardiac Cycle,” SPIE Medical Imaging, Orlando, FL, Feb. 9-14, 2013. pp. 1-10.
 
 **Copyright**
+
+Copyright (c) Brice Hirst, Y. Rosa Zheng, Ming Yang, Lixin Ma, 2013.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
