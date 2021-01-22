@@ -1,6 +1,6 @@
 # MRI CS Toolbox for MATLAB - Copyright (c) Brice Hirst, 2013 
 
-The work was done at Missouri University of Science and Technology and the University of Missouri-Columbia
+The work was done at Missouri University of Science and Technology, the University of Missouri-Columbia and and Harry S Truman Memorial Veterans’ Hospital.
 
 For more information, contact Dr. Rosa Zheng  (yrz218 at lehigh.edu) or Dr. Lixin Ma  (mal at health.missouri.edu)
 
@@ -17,8 +17,7 @@ This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version. However, the included test data
-is property of the Nuclear Medicine Department of the University of
-Missouri VA Hospital, and is NOT to be redistributed.
+is property of the VA-Biomolecular Imaging Center of the Truman VA Hospital and the University of Missouri, and is NOT to be redistributed.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
